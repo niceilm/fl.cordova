@@ -5,6 +5,7 @@ function $flBackButtonExiterProvider() {
   var options = {
     message: '한번 더 누르시면 앱이 종료됩니다.',
     delay: 3000,
+    homePaths: ["/"],
     autoStart: true
   };
   this.setOptions = function(newOptions) {
@@ -25,7 +26,7 @@ function $flBackButtonExiterProvider() {
 
     function onBackButton(e) {
       $log.debug($location.url());
-      var isHomePath = $location.url() === "/";
+      var isHomePath = options.homePaths.indexOf($location.url()) > -1;
       if(isHomePath) {
         if(isPressBackButton) {
           e.preventDefault();
